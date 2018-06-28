@@ -16,4 +16,8 @@ public class CmmnClCodeDAO extends EgovComAbstractDAO {
 		return (List<EgovMap>) list("CmmnClCodeDAO.selectCmmnClCodeList", vo);
 	}
 
+	public EgovMap selectCmmnClCode(CmmnClCodeVO vo) throws Exception {
+		return (EgovMap) select("CmmnClCodeDAO.selectCmmnClCode", vo);
+	}
+
 }

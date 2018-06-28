@@ -28,7 +28,7 @@ public class CmmnClCodeDAOTest {
 		// fail("Not yet implemented");
 	}
 
-	@Test
+	// @Test
 	public void selectCmmnClCodeList() throws Exception {
 		CmmnClCodeVO vo = new CmmnClCodeVO();
 		vo.setUseAt("Y");
@@ -41,6 +41,22 @@ public class CmmnClCodeDAOTest {
 			egovLogger.debug("result=" + result);
 			egovLogger.debug("clCode=" + result.get("clCode"));
 			egovLogger.debug("clCodeNm=" + result.get("clCodeNm"));
+		});
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void selectCmmnClCode() throws Exception {
+		CmmnClCodeVO vo = new CmmnClCodeVO();
+		vo.setClCode("EFC");
+
+		EgovMap result = cmmnClCodeDAO.selectCmmnClCode(vo);
+
+		egovLogger.debug("result=" + result);
+
+		result.forEach((k, v) -> {
+			egovLogger.debug("k=" + k);
+			egovLogger.debug("v=" + v);
 		});
 	}
 

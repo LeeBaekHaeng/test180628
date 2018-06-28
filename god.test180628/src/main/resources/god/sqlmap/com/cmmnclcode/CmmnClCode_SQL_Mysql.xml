@@ -20,4 +20,21 @@ WHERE USE_AT = #useAt#
 ]]>
 	</select>
 
+	<select id="CmmnClCodeDAO.selectCmmnClCode" parameterClass="god.com.cmmnclcode.service.CmmnClCodeVO"
+		resultClass="egovframework.rte.psl.dataaccess.util.EgovMap">
+<![CDATA[ 
+SELECT 
+	cl_code
+	, cl_code_nm
+	, cl_code_dc
+	, use_at
+	, frst_regist_pnttm
+	, frst_register_id
+	, last_updt_pnttm
+	, last_updusr_id
+FROM comtccmmnclcode
+WHERE cl_code = #clCode#
+]]>
+	</select>
+
 </sqlMap>
