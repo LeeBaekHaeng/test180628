@@ -182,4 +182,15 @@ public class CmmnClCodeDAOTest {
 		egovLogger.debug("result=" + result);
 	}
 
+	// @Test
+	public void deleteCmmnClCode() throws Exception {
+		CmmnClCodeVO vo = new CmmnClCodeVO();
+
+		vo.setClCode("AAA");
+
+		int result = cmmnClCodeDAO.deleteCmmnClCode(vo);
+
+		egovLogger.debug("result=" + result);
+	}
+
 }

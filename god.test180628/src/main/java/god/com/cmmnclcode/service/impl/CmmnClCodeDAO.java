@@ -45,4 +45,8 @@ public class CmmnClCodeDAO extends EgovComAbstractDAO {
 		return update("CmmnClCodeDAO.updateCmmnClCodeUseAt", vo);
 	}
 
+	public int deleteCmmnClCode(CmmnClCodeVO vo) {
+		return delete("CmmnClCodeDAO.deleteCmmnClCode", vo);
+	}
+
 }

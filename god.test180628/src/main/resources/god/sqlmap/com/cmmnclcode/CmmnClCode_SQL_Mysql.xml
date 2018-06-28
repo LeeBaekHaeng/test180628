@@ -131,4 +131,11 @@ where cl_code = #clCode#
 ]]>
 	</update>
 
+	<delete id="CmmnClCodeDAO.deleteCmmnClCode" parameterClass="god.com.cmmnclcode.service.CmmnClCodeVO">
+<![CDATA[ 
+delete from comtccmmnclcode
+where cl_code = #clCode#
+]]>
+	</delete>
+
 </sqlMap>
