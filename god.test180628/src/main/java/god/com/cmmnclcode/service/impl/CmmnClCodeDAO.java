@@ -20,4 +20,29 @@ public class CmmnClCodeDAO extends EgovComAbstractDAO {
 		return (EgovMap) select("CmmnClCodeDAO.selectCmmnClCode", vo);
 	}
 
+	public int insertCmmnClCode(CmmnClCodeVO vo) {
+		try {
+			insert("CmmnClCodeDAO.insertCmmnClCode", vo);
+			return 1;
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+	public int insertCmmnClCode2(CmmnClCodeVO vo) {
+		return update("CmmnClCodeDAO.insertCmmnClCode2", vo);
+	}
+
+	public int insertCmmnClCode3(CmmnClCodeVO vo) {
+		return update("CmmnClCodeDAO.insertCmmnClCode3", vo);
+	}
+
+	public int updateCmmnClCode(CmmnClCodeVO vo) {
+		return update("CmmnClCodeDAO.updateCmmnClCode", vo);
+	}
+
+	public int updateCmmnClCodeUseAt(CmmnClCodeVO vo) {
+		return update("CmmnClCodeDAO.updateCmmnClCodeUseAt", vo);
+	}
+
 }

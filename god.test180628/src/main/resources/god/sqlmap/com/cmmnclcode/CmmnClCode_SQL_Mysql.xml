@@ -16,8 +16,21 @@ SELECT
 	, last_updt_pnttm
 	, last_updusr_id
 FROM comtccmmnclcode
-WHERE USE_AT = #useAt#
+WHERE 1 = 1
 ]]>
+
+		<isNotEmpty property="useAt">
+<![CDATA[ 
+and USE_AT = #useAt#
+]]>
+		</isNotEmpty>
+
+		<isNotEmpty property="clCodeNm">
+<![CDATA[ 
+and cl_code_nm like concat('%', #clCodeNm#, '%')
+]]>
+		</isNotEmpty>
+
 	</select>
 
 	<select id="CmmnClCodeDAO.selectCmmnClCode" parameterClass="god.com.cmmnclcode.service.CmmnClCodeVO"
@@ -36,5 +49,86 @@ FROM comtccmmnclcode
 WHERE cl_code = #clCode#
 ]]>
 	</select>
+
+	<insert id="CmmnClCodeDAO.insertCmmnClCode" parameterClass="god.com.cmmnclcode.service.CmmnClCodeVO">
+<![CDATA[ 
+insert into comtccmmnclcode (
+	cl_code
+	, cl_code_nm
+	, cl_code_dc
+	, use_at
+	, frst_regist_pnttm
+	, frst_register_id
+) values (
+	#clCode#
+	, #clCodeNm#
+	, #clCodeDc#
+	, #useAt#
+	, sysdate()
+	, #frstRegisterId#
+)
+]]>
+	</insert>
+
+	<insert id="CmmnClCodeDAO.insertCmmnClCode2" parameterClass="god.com.cmmnclcode.service.CmmnClCodeVO">
+<![CDATA[ 
+insert into comtccmmnclcode (
+	cl_code
+	, cl_code_nm
+	, cl_code_dc
+	, use_at
+	, frst_regist_pnttm
+	, frst_register_id
+) values (
+	#clCode#
+	, #clCodeNm#
+	, #clCodeDc#
+	, #useAt#
+	, #frstRegistPnttm#
+	, #frstRegisterId#
+)
+]]>
+	</insert>
+
+	<insert id="CmmnClCodeDAO.insertCmmnClCode3" parameterClass="god.com.cmmnclcode.service.CmmnClCodeVO">
+<![CDATA[ 
+insert into comtccmmnclcode (
+	cl_code
+	, cl_code_nm
+	, cl_code_dc
+	, use_at
+	, frst_regist_pnttm
+	, frst_register_id
+) values (
+	#clCode#
+	, #clCodeNm#
+	, #clCodeDc#
+	, #useAt#
+	, #frstRegistPnttm2#
+	, #frstRegisterId#
+)
+]]>
+	</insert>
+
+	<update id="CmmnClCodeDAO.updateCmmnClCode" parameterClass="god.com.cmmnclcode.service.CmmnClCodeVO">
+<![CDATA[ 
+update comtccmmnclcode set
+	cl_code_nm = #clCodeNm#
+	, cl_code_dc = #clCodeDc#
+	, last_updt_pnttm = #lastUpdtPnttm#
+	, last_updusr_id = #lastUpdusrId#
+where cl_code = #clCode#
+]]>
+	</update>
+
+	<update id="CmmnClCodeDAO.updateCmmnClCodeUseAt" parameterClass="god.com.cmmnclcode.service.CmmnClCodeVO">
+<![CDATA[ 
+update comtccmmnclcode set
+	use_at = #useAt#
+	, last_updt_pnttm = #lastUpdtPnttm#
+	, last_updusr_id = #lastUpdusrId#
+where cl_code = #clCode#
+]]>
+	</update>
 
 </sqlMap>
