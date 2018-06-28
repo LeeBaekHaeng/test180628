@@ -1,15 +1,18 @@
 package com.example.demo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import lombok.Data;
 
@@ -64,31 +67,39 @@ class CmmnCode {
 interface CmmnCodeRepository extends PagingAndSortingRepository<CmmnCode, String> {
 }
 
-// @Entity
-// @Table(name = "comtccmmndetailcode")
-// @Data
-// class CmmnDetailCode {
-//
-// @Id
-// @Column(name = "code_id")
-// // private String codeId;
-// private CmmnCode cmmnCode;
-// @Id
-// private String code;
-// private String codeNm;
-// private String codeDc;
-// private String useAt;
-// private String frstRegistPnttm;
-// private String frstRegisterId;
-// private String lastUpdtPnttm;
-// private String lastUpdusrId;
-//
-// }
-//
-// @RepositoryRestResource
-// interface CmmnDetailCodeRepository extends
-// PagingAndSortingRepository<CmmnDetailCode, String> {
-// }
+// @id @embeddedid @idclass
+// https://www.objectdb.com/java/jpa/entity/id
+
+@SuppressWarnings("serial")
+@Data
+class CmmnDetailCodeId implements Serializable {
+	private String codeId;
+	private String code;
+}
+
+@Entity
+@Table(name = "comtccmmndetailcode")
+@IdClass(CmmnDetailCodeId.class)
+@Data
+class CmmnDetailCode {
+
+	@Id
+	private String codeId;
+	@Id
+	private String code;
+	private String codeNm;
+	private String codeDc;
+	private String useAt;
+	private String frstRegistPnttm;
+	private String frstRegisterId;
+	private String lastUpdtPnttm;
+	private String lastUpdusrId;
+
+}
+
+@RepositoryRestResource
+interface CmmnDetailCodeRepository extends PagingAndSortingRepository<CmmnDetailCode, CmmnDetailCodeId> {
+}
 
 // @RestController
 // @RequestMapping("/cmmn-cl-codes")
