@@ -1,6 +1,8 @@
 package com.example.demo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Optional;
 
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.transaction.Transactional;
 
+import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +18,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import lombok.Data;
 
@@ -26,7 +32,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Bean
+	// @Bean
 	CommandLineRunner commandLineRunner(CmmnClCodeRepository cmmnClCodeRepository) {
 		return (args -> {
 
@@ -44,7 +50,7 @@ public class DemoApplication {
 		});
 	}
 
-	@Bean
+	// @Bean
 	CommandLineRunner commandLineRunner2(CmmnClCodeRepository cmmnClCodeRepository) {
 		return (args -> {
 
@@ -67,9 +73,9 @@ public class DemoApplication {
 		});
 	}
 
-	@Bean
+	// @Bean
 	// @Transactional
-	CommandLineRunner commandLineRunner3(CmmnClCodeRepository cmmnClCodeRepository) {
+	public CommandLineRunner commandLineRunner3(CmmnClCodeRepository cmmnClCodeRepository) {
 		return (args -> {
 
 			System.out.println("commandLineRunner3");
@@ -78,6 +84,7 @@ public class DemoApplication {
 			String id = "AAA";
 			Optional<CmmnClCode> findById = cmmnClCodeRepository.findById(id);
 			CmmnClCode result = findById.orElse(new CmmnClCode());
+			result.setClCodeNm("에이 에이 에이 수정 " + new Date());
 			result.setLastUpdtPnttm(new Date());
 			System.out.println("result=" + result);
 
@@ -100,6 +107,7 @@ public class DemoApplication {
 @Entity
 @Table(name = "comtccmmnclcode")
 @Data
+@Audited
 class CmmnClCode {
 
 	@Id
@@ -124,15 +132,36 @@ class CmmnClCodeService {
 	@Autowired
 	private CmmnClCodeRepository cmmnClCodeRepository;
 
-	void update() {
+	public CmmnClCode update() {
 
 		// String id = "EFC";
 		String id = "AAA";
 		Optional<CmmnClCode> findById = cmmnClCodeRepository.findById(id);
 		CmmnClCode result = findById.orElse(new CmmnClCode());
-		result.setLastUpdtPnttm(new Date());
+		// result.setLastUpdtPnttm(new Date());
+		// result.setClCodeNm("에이 에이 에이 수정");
+		// result.setClCodeNm("에이 에이 에이 수정 " + new Date());
+		result.setClCodeNm(
+				"에이 에이 에이 수정 " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA).format(new Date()));
 		System.out.println("result=" + result);
 
+		return result;
+
+	}
+
+}
+
+@RestController
+@RequestMapping("/cmmn-cl-codes")
+class CmmnClCodeRestController {
+
+	@Autowired
+	private CmmnClCodeService cmmnClCodeService;
+
+	// @RequestMapping(method = RequestMethod.POST)
+	@PostMapping
+	public CmmnClCode update() {
+		return cmmnClCodeService.update();
 	}
 
 }
