@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CmmnClCode">
+
+	<select id="CmmnClCodeDAO.selectCmmnClCodeList" parameterClass="god.com.cmmnclcode.service.CmmnClCodeVO"
+		resultClass="egovframework.rte.psl.dataaccess.util.EgovMap">
+<![CDATA[ 
+SELECT 
+	cl_code
+	, cl_code_nm
+	, cl_code_dc
+	, use_at
+	, frst_regist_pnttm
+	, frst_register_id
+	, last_updt_pnttm
+	, last_updusr_id
+FROM comtccmmnclcode
+WHERE USE_AT = #useAt#
+]]>
+	</select>
+
+</sqlMap>
